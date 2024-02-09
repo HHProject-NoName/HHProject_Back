@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String 
-from pydantic import BaseModel
 from db import Base
 from db import ENGINE
+from sqlalchemy.orm import relationship
 
 class UserTable(Base):
     __tablename__ = 'HH_Login_login'

@@ -2,10 +2,18 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 
-user_name = "hj"
-user_pwd="hh"
-db_host="localhost"
-db_name="HH_base"
+from sqlalchemy import Table, MetaData
+from sqlalchemy import insert, delete
+import os
+
+# user_name = "hj"
+# user_pwd="hh"
+# db_host="localhost"
+# db_name="HH_base"
+user_name = os.getenv("USER")
+user_pwd = os.getenv("PASSWORD")
+db_host = os.getenv("HOST")
+db_name = os.getenv("NAME")
 
 DATABASE='mysql://%s:%s@%s/%s?charset=utf8'%(
     user_name,
