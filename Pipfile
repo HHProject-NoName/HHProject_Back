@@ -20,6 +20,9 @@ mysql-connector-python = "*"
 sqlalchemy = "*"
 pydantic = "*"
 starlette = "*"
+flask-mail = "*"
+flask = "*"
+aiosmtplib = "*"
 
 [dev-packages]
 
