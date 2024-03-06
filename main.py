@@ -17,7 +17,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
+        
 #Dependency
 def get_db():
     db = session()
@@ -82,9 +82,31 @@ def submit_code(email:str, code:str):
         else:
             return {"return" : "False"}
     else:
-        return HTTPException(status_code=400, detail='email or code empty')
+        return HTTPException(status_code=400, detail='email or code is empty')
     
 
+###########################################################################################
+# 로그인 저장
+###########################################################################################
+
+# @app.post('/login_save', response_model=list[schema.SaveLogin])
+@app.post('/login_save')   
+# def login_save(check_mail:str,
+#                email:str, 
+#                start_dt:str, 
+#                last_dt:str, 
+#                token: Union[str, None] = None,
+#                delete_yn: Union[str, None] = None,
+#                end_dt:Union[str, None] = None, 
+#                db:session=Depends(get_db)):
+    # input_dict = input_Data.dict()
+    # check_mail = input_dict.check_mail
+    # email = input_dict.email
+def login_save(input_data:schema.SaveLogin, db:session=Depends(get_db)):
+    if input_data.check_mail and input_data.email:
+        result = crud.save_login(db, input_data)
+    else:
+        return HTTPException(status_code=400, detail='email or check_mail is empty')
 
 if __name__ == '__main__':
     import uvicorn
