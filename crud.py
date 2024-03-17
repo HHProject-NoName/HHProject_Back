@@ -27,6 +27,12 @@ def save_login(db:Session, itemdict:schema.SaveLogin):
     
     db.commit()
     # db.refresh()
-    return "성공?"
+    return "저장성공"
+def del_login(db:Session, itemdict:schema.User):
+    input_data = model.UserTable(**itemdict.dict())
+    print("삭제 하기전:", input_data)
+    db.remove(input_data)
+    db.commit()
+    return "삭제성공"
 
 

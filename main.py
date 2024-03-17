@@ -86,7 +86,7 @@ def submit_code(email:str, code:str):
     
 
 ###########################################################################################
-# 로그인 저장
+# 로그인 저장, 삭제
 ###########################################################################################
 
 # @app.post('/login_save', response_model=list[schema.SaveLogin])
@@ -105,8 +105,16 @@ def submit_code(email:str, code:str):
 def login_save(input_data:schema.SaveLogin, db:session=Depends(get_db)):
     if input_data.check_mail and input_data.email:
         result = crud.save_login(db, input_data)
+        return {"result": result}
     else:
         return HTTPException(status_code=400, detail='email or check_mail is empty')
+
+def login_del(input_date:schema.User, db:session=Depends(get_db)):
+    if input_date.email:
+        result = crud.del_login(db, db,input_date)
+        return {"reulst" : result}
+    else:
+        return HTTPException(status_code=400, detail='email is empty')
 
 if __name__ == '__main__':
     import uvicorn
